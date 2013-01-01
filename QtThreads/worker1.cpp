@@ -60,6 +60,7 @@ void Producer1::run()
 
 */
 
+/*
 void Producer1::run()
 {
     qDebug() << "thread " << QThread::currentThread()->objectName() << " begin running";
@@ -78,6 +79,33 @@ void Producer1::run()
     qDebug() << "thread " << QThread::currentThread()->objectName() << " end running";
 
     g_mutex.unlock();
+
+}
+*/
+
+void Producer1::run()
+{
+    qDebug() << "thread " << QThread::currentThread()->objectName() << " begin running";
+
+    g_mutex.lock();
+
+    for(int i = 1; i < 20000;i++)
+    {
+        for(int j = 0; j < 30000; j++)
+            int r = i+j;
+
+//        if(i%10000 == 0)
+//            qDebug() << "Producer " << QThread::currentThread()->objectName() << " is running" << i;
+    }
+
+
+    g_mutex.unlock();
+
+    qDebug() << "thread " << QThread::currentThread()->objectName() << " before wait";
+    g_con.wait(&g_mutex);
+    qDebug() << "thread " << QThread::currentThread()->objectName() << " after wait";
+
+
 
 }
 
