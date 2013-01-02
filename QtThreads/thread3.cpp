@@ -1,4 +1,5 @@
 #include "thread3.h"
+QMutex g_mutex3;
 
 Producer3::Producer3(char id, int size, QMutex* pMutex, QObject *parent) :
     QThread(parent),
@@ -33,10 +34,10 @@ void Producer3::run()
     }
 
     m_mutex->lock();
-    m_finishedCon->wakeAll();
+    m_finishedCon->wakeOne();
     m_mutex->unlock();
 
-    qDebug() << "producing done" << m_id;
+    qDebug() << "producing done: " << m_buffer;
 
 }
 
@@ -52,33 +53,45 @@ void Consumer3::run()
 
     QMutex m;
 
-    Producer3 p1('A',10, &m);
+    Producer3 p1('A',50, &m);
     p1.start();
 
-    Producer3 p2('B',10, &m);
+//    qDebug() << "Before p1.wait";
+//    p1.finishedCondition()->wait(&m);
+
+    Producer3 p2('B',50, &m);
     p2.start();
 
-    Producer3 p3('C',10, &m);
+//    qDebug() << "Before p2.wait";
+//    p2.finishedCondition()->wait(&m);
+
+    Producer3 p3('C',50, &m);
     p3.start();
 
-    qDebug() << "Before p1.wait";
-    p1.finishedCondition()->wait(&m);
+//    qDebug() << "Before p3.wait";
+//    p3.finishedCondition()->wait(&m);
 
-    qDebug() << "Before p2.wait";
-    p2.finishedCondition()->wait(&m);
+    Producer3 p4('D',50, &m);
+    p4.start();
 
-    qDebug() << "Before p3.wait";
-    p3.finishedCondition()->wait(&m);
+//    qDebug() << "Before p4.wait";
+//    p4.finishedCondition()->wait(&m);
+
+
+
+
+
+    p2.wait();
+    p1.wait();
+    p4.wait();
+    p3.wait();
 
     qDebug() << "All Done:";
     qDebug() << p1.buffer();
     qDebug() << p2.buffer();
     qDebug() << p3.buffer();
+    qDebug() << p4.buffer();
 
-
-    p1.wait();
-    p2.wait();
-    p3.wait();
     qDebug() << "Consumer finished!";
 
 }
