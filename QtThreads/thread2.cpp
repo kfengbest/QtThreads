@@ -1,6 +1,6 @@
 #include "thread2.h"
 
-const int g_BufferSize = 200;
+const int g_BufferSize = 500;
 char g_Buffer[g_BufferSize];
 int g_index = 0;
 QMutex g_mutex2;
@@ -35,7 +35,7 @@ void Producer2::run()
 
     while(true)
     {
-        g_mutex2.lock();
+        QMutexLocker locker(&g_mutex2);
 
         if(g_index >= g_BufferSize)
             break;
@@ -52,11 +52,11 @@ void Producer2::run()
 
         g_index++;
 
-        g_mutex2.unlock();
-
     }
 
     qDebug() << "Produce finished." << m_id;
+
+    g_index = 0;
 }
 
 
