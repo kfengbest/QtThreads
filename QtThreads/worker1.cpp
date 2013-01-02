@@ -87,7 +87,7 @@ void Producer1::run()
 {
     qDebug() << "thread " << QThread::currentThread()->objectName() << " begin running";
 
-    g_mutex.lock();
+  //  g_mutex.lock();
 
     for(int i = 1; i < 20000;i++)
     {
@@ -99,7 +99,7 @@ void Producer1::run()
     }
 
 
-    g_mutex.unlock();
+ //   g_mutex.unlock();
 
     g_mutex.lock();
     qDebug() << "thread " << QThread::currentThread()->objectName() << " before wait";

@@ -5,6 +5,7 @@
 #include <QtCore>
 #include <QtGui>
 #include "worker1.h"
+#include "thread2.h"
 
 namespace Ui {
 class MainWindow;
@@ -29,11 +30,18 @@ private slots:
 
     void on_pushButton_5_clicked();
 
+    void on_pushButton_7_clicked();
+
+    void on_pushButton_6_clicked();
+
 private:
     Ui::MainWindow *ui;
 
     QList<QThread*> m_threadpool1;
     Consumer1* m_consumer;
+
+    Producer2* m_producer2;
+    Consumer2* m_consumer2;
 
 };
 

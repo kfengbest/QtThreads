@@ -9,6 +9,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     m_consumer = NULL;
+    m_producer2 = NULL;
+    m_consumer2 = NULL;
 }
 
 MainWindow::~MainWindow()
@@ -60,5 +62,25 @@ void MainWindow::on_pushButton_5_clicked()
 {
 
     qDebug() << "idealThreadCount: " << QThread::idealThreadCount();
+
+}
+
+// Read
+void MainWindow::on_pushButton_7_clicked()
+{
+    if(m_consumer2 == NULL)
+        m_consumer2 = new Consumer2();
+
+    m_consumer2->start();
+}
+
+// Producer2
+void MainWindow::on_pushButton_6_clicked()
+{
+
+    char id = 'A' + m_threadpool1.size();
+    Producer2* t = new Producer2(id);
+    m_threadpool1.append(t);
+    t->start();
 
 }
