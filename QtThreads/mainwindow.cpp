@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "worker1.h"
+#include "thread3.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -83,4 +84,12 @@ void MainWindow::on_pushButton_6_clicked()
     m_threadpool1.append(t);
     t->start();
 
+}
+
+void MainWindow::on_pushButton_8_clicked()
+{
+    char id = 'O' + m_threadpool1.size();
+    Consumer3* t = new Consumer3(id);
+    m_threadpool1.append(t);
+    t->start();
 }
