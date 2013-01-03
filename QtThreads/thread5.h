@@ -14,6 +14,8 @@ public:
 
     int number() const {return m_n;}
 
+    static Counter* get();
+
 private:
     int m_n;
 };
@@ -25,6 +27,7 @@ public:
     explicit Thread5(char id, QObject *parent = 0);
 
     virtual void run();
+    void counter(Counter* c) {m_counter = c;}
 
 signals:
     
@@ -32,7 +35,7 @@ public slots:
 
 private:
 
-   Counter m_counter;
+   Counter* m_counter;
 
    char m_id;
 };

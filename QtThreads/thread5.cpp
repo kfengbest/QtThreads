@@ -11,14 +11,14 @@ void Thread5::run()
 {
     for(int i = 0; i < 20; i++)
     {
-        qDebug() << m_id << " befor " << m_counter.number();
-        m_counter.increase();
+        qDebug() << m_id << " befor " << m_counter->number();
+        m_counter->increase();
 
         for(int x = 0; x < 10000; x++)
             for(int y = 0; y < 10000; y++)
                 int z = x-y;
 
-        qDebug() << m_id << " after " << m_counter.number();
+        qDebug() << m_id << " after " << m_counter->number();
 
     }
 }
@@ -31,6 +31,12 @@ Counter::Counter()
 Counter::~Counter()
 {
 
+}
+
+Counter* Counter::get()
+{
+    static Counter s_theOneAndOnly;
+    return &s_theOneAndOnly;
 }
 
 void Counter::increase()
