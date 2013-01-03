@@ -3,7 +3,7 @@
 #include "worker1.h"
 #include "thread3.h"
 #include "thread4.h"
-
+#include "thread5.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -117,4 +117,12 @@ void MainWindow::on_pushButton_10_clicked()
     Master* m = new Master();
     m_threadpool1.append(m);
     m->start();
+}
+
+void MainWindow::on_pushButton_11_clicked()
+{
+    char id = 'A' + m_threadpool1.size();
+    Thread5* t = new Thread5(id);
+    m_threadpool1.append(t);
+    t->start();
 }
