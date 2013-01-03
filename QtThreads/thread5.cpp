@@ -7,14 +7,11 @@ Thread5::Thread5(char id, QObject *parent) :
 {
 }
 
-QMutex g_mutex5;
 
 void Thread5::run()
 {
     for(int i = 0; i < 20; i++)
     {
-        QMutexLocker locker(&g_mutex5);
-
         qDebug() << m_id << " befor " << m_counter->number();
         m_counter->increase();
 
