@@ -123,7 +123,7 @@ void MainWindow::on_pushButton_11_clicked()
 {
     char id = 'A' + m_threadpool1.size();
     Thread5* t = new Thread5(id);
-    t->counter(new Counter());
+    t->counter(Counter::get());
     m_threadpool1.append(t);
     t->start();
 }
