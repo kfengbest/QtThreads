@@ -16,11 +16,13 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     worker1.cpp \
     thread2.cpp \
-    thread3.cpp
+    thread3.cpp \
+    thread4.cpp
 
 HEADERS  += mainwindow.h \
     worker1.h \
     thread2.h \
-    thread3.h
+    thread3.h \
+    thread4.h
 
 FORMS    += mainwindow.ui

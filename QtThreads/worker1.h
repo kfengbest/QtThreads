@@ -38,5 +38,16 @@ private:
     bool m_bWakeAll;
 };
 
+class Consumer11 : public QThread
+{
+
+public:
+    Consumer11(int id);
+
+    virtual void run();
+
+private:
+    int m_id;
+};
 
 #endif // WORKER1_H

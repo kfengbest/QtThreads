@@ -24,6 +24,7 @@ void printme()
     g_mutex.unlock();
 }
 
+
 Producer1::Producer1(int id, QObject *parent) :
     QThread(parent),
     m_id(id)
@@ -136,3 +137,29 @@ void Consumer1::setWaitAll(bool bValue)
     m_bWakeAll = bValue;
 }
 
+
+
+int g_tatally = 0;
+void count()
+{
+    for(int i = 0; i <= 50; i++)
+    {
+        g_tatally +=1;
+    }
+}
+
+Consumer11::Consumer11(int id)
+    : m_id(id)
+{
+
+}
+
+void Consumer11::run()
+{
+    qDebug() << "Consumer " << m_id << " before count ";
+
+    count();
+
+    qDebug() << "Consumer " << m_id << " after count " << g_tatally;
+
+}
